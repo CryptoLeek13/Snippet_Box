@@ -25,8 +25,9 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 		// response body. We then return from the function so that the
 		// subsequent code is not executed.
 		w.Header().Set("Allow", "POST")
-		w.WriteHeader(405)
-		w.Write([]byte("Method not Allowed"))
+		// Use http.Error() function to send 405 status code and "Method Not"
+		// Allowed" string as the response body.
+		http.Error(w, "Method not Allowed", 405)
 		return
 	}
 
@@ -37,7 +38,7 @@ func snippetCreate(w http.ResponseWriter, r *http.Request) {
 func snippetView(w http.ResponseWriter, r *http.Request) {
 	if r.Method != "GET" {
 		w.Header().Set("Allow", "GET")
-		w.WriteHeader(405)
+		http.Error(w, "Method not Allowed", 405)
 		return
 	}
 	w.Write([]byte("Display an specific snippet"))
