@@ -1,0 +1,14 @@
+FROM golang:1.19
+# Set Copy destination
+WORKDIR /app
+# Copy the source code
+COPY . .
+
+# Build the app
+RUN go build -o cryptoleek/letsgo .
+
+# Expose port 8080
+EXPOSE 8080
+
+#Define cmd to run the app
+CMD [ "./letsgo" ]
